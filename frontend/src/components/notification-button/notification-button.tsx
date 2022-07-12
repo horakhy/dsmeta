@@ -1,5 +1,5 @@
 import "./notification-button.css"
-import icon from '../images/notification-icon.svg';
+import icon from '../../images/notification-icon.svg';
 
 export const NotificationButton = () => {
   return (

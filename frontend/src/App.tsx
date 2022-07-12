@@ -1,9 +1,10 @@
-import { NotificationButton } from "./components/notification-button";
+import { Header } from "./components/header/header";
+import { NotificationButton } from "./components/notification-button/notification-button";
 
 function App() {
   return (
     <>
-      <h1>Hello Bruh</h1>
+      <Header />
       <NotificationButton />
     </>
   );
