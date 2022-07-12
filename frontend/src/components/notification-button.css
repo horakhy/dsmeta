@@ -1,0 +1,12 @@
+.notification-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3.5rem;
+    width: 3.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background-color: #FH6B72;
+    border: 1px solid #FF6B72;
+
+}
