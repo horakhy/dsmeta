@@ -27,7 +27,6 @@ public class Sale {
     
   }
 
-  // generate getters and setters
   public Long getId() {
     return id;
   }
@@ -76,5 +75,5 @@ public class Sale {
     this.amount = amount;
   }
 
-  
+
 }
