@@ -1,4 +1,5 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { NotificationButton } from "../notification-button/notification-button";
@@ -19,11 +20,17 @@ export const SalesCard = () => {
   const [date, setDate] = useState<SalesCardDate>(defaultSalesCardDate);
 
   const handleChangeStart = (date: SalesCardDate) => {
-    setDate(ps => ({ ...ps, ...date }));
+    setDate((ps) => ({ ...ps, ...date }));
   };
 
-  console.log(date.startDate);
-  console.log(date.endDate);
+  useEffect(() => {
+    axios.get("http://localhost:8080/sales").then((res) => {
+      console.log(res.data);
+    });
+  }, [date]);
+
+  // console.log(date.startDate);
+  // console.log(date.endDate);
 
   return (
     <div className="dsmeta-card">
@@ -32,9 +39,9 @@ export const SalesCard = () => {
         <div className="dsmeta-form-control-container">
           <DatePicker
             minDate={date.endDate}
-            selected={date.startDate} 
+            selected={date.startDate}
             className="dsmeta-form-control"
-            onChange={date => handleChangeStart({ startDate: date })}
+            onChange={(date) => handleChangeStart({ startDate: date })}
             dateFormat="dd/MM/yyyy"
           />
         </div>
@@ -42,7 +49,7 @@ export const SalesCard = () => {
           <DatePicker
             selected={date.endDate}
             className="dsmeta-form-control"
-            onChange={date => handleChangeStart({ endDate: date})}
+            onChange={(date) => handleChangeStart({ endDate: date })}
             dateFormat="dd/MM/yyyy"
           />
         </div>
