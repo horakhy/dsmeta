@@ -1,9 +1,16 @@
 import "./notification-button.css"
 import icon from '../../images/notification-icon.svg';
 
-export const NotificationButton = () => {
+// props
+interface NotificationButtonProps {
+  onClick: () => void;
+}
+
+export const NotificationButton = (props: NotificationButtonProps) => {
+  const { onClick } = props;
+  
   return (
-    <div className="notification-button">
+    <div onClick={onClick} className="notification-button">
       <img src={icon} alt="notification icon" />
     </div>
   );

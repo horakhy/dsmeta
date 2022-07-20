@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Sale } from "../../models/sale";
 import { BASE_URL } from "../../request";
 import { NotificationButton } from "../notification-button/notification-button";
+import { ToastContainer, toast } from 'react-toastify';
 
 import "./sales-card.css";
 
@@ -29,7 +30,11 @@ export const SalesCard = () => {
 
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/sales`).then((res) => {
+
+    const dateMin = date.startDate?.toISOString().slice(0, 10);
+    const dateMax = date.endDate?.toISOString().slice(0, 10);
+
+    axios.get(`${BASE_URL}/sales?minDate=${dateMin}&maxDate=${dateMax}`).then((res) => {
       setSales(res.data.content)
     });
   }, [date]);
@@ -37,13 +42,17 @@ export const SalesCard = () => {
   // console.log(date.startDate);
   // console.log(date.endDate);
 
+  const handleToast = () => {
+    console.log("yoooo");
+    toast("Que vibe indescritível, meoo")
+  }
+
   return (
     <div className="dsmeta-card">
       <h2 className="dsmeta-sales-title">Vendas</h2>
       <div>
         <div className="dsmeta-form-control-container">
           <DatePicker
-            minDate={date.endDate}
             selected={date.startDate}
             className="dsmeta-form-control"
             onChange={(date) => handleChangeStart({ startDate: date })}
@@ -53,6 +62,7 @@ export const SalesCard = () => {
         <div className="dsmeta-form-control-container">
           <DatePicker
             selected={date.endDate}
+            minDate={date.endDate}
             className="dsmeta-form-control"
             onChange={(date) => handleChangeStart({ endDate: date })}
             dateFormat="dd/MM/yyyy"
@@ -83,7 +93,7 @@ export const SalesCard = () => {
                 <td className="show992">{sale.deals}</td>
                 <td>R$ {sale.amount.toFixed(2)}</td>
                 <td>
-                  <NotificationButton />
+                  <NotificationButton onClick={handleToast} />
                 </td>
               </tr>
             ))}

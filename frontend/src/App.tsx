@@ -1,20 +1,31 @@
 import { Header } from "./components/header/header";
-import { NotificationButton } from "./components/notification-button/notification-button";
 import { SalesCard } from "./components/sales-card/sales-card";
-
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 function App() {
   return (
     <>
       <Header />
-     <main>
-      <section id="sales">
-        <div className="dsmeta-container">
-        <SalesCard />
-        </div>
+      <main>
+        <section id="sales">
+          <div className="dsmeta-container">
+            <SalesCard />
+          </div>
         </section>
-    </main>
+      </main>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </>
-  )
+  );
 }
 
 export default App;
