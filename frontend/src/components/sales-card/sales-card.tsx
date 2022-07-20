@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Sale } from "../../models/sale";
 import { BASE_URL } from "../../request";
 import { NotificationButton } from "../notification-button/notification-button";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 import "./sales-card.css";
 
@@ -27,25 +27,20 @@ export const SalesCard = () => {
     setDate((ps) => ({ ...ps, ...date }));
   };
 
-
-
   useEffect(() => {
-
     const dateMin = date.startDate?.toISOString().slice(0, 10);
     const dateMax = date.endDate?.toISOString().slice(0, 10);
 
-    axios.get(`${BASE_URL}/sales?minDate=${dateMin}&maxDate=${dateMax}`).then((res) => {
-      setSales(res.data.content)
-    });
+    axios
+      .get(`${BASE_URL}/sales?minDate=${dateMin}&maxDate=${dateMax}`)
+      .then((res) => {
+        setSales(res.data.content);
+      });
   }, [date]);
 
-  // console.log(date.startDate);
-  // console.log(date.endDate);
-
   const handleToast = () => {
-    console.log("yoooo");
-    toast("Que vibe indescritível, meoo")
-  }
+    toast.success("Que vibe indescritível, meuu!");
+  };
 
   return (
     <div className="dsmeta-card">
@@ -87,12 +82,14 @@ export const SalesCard = () => {
             {sales.map((sale) => (
               <tr key={sale.id}>
                 <td className="show992">{sale.id}</td>
-                <td className="show576">{new Date(sale.date).toLocaleDateString()}</td>
+                <td className="show576">
+                  {new Date(sale.date).toLocaleDateString()}
+                </td>
                 <td>{sale.sellerName}</td>
                 <td className="show992">{sale.visited}</td>
                 <td className="show992">{sale.deals}</td>
                 <td>R$ {sale.amount.toFixed(2)}</td>
-                <td>
+                <td className="dsmeta-red-btn-container">
                   <NotificationButton onClick={handleToast} />
                 </td>
               </tr>
